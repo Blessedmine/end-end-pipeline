@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: planning-app
+  name: planning-app-deployment
   namespace: planning-app-deployment
 spec:
-  type: NodePort
-  ports:
-    - port: 80       # The port the service is exposed on
-      targetPort: 3000  # The port your application is listening on
   selector:
-    app: node-app
+    app: planning-app-deployment
+  ports:
+    - protocol: TCP
+      port: 80 # The port the service is exposed on
+      targetPort: 80 # The port your application is listening on

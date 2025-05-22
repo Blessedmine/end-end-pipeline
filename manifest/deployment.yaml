@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
         - name: planning-app-deployment
-          image: blessedmine/planning-app-deployment:v1
+          image: blessedmine/planning-app-deployment:
           ports:
             - containerPort: 3000
