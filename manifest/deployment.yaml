@@ -6,7 +6,7 @@ metadata:
   labels:
     app: planning-app-deployment
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: planning-app-deployment
@@ -17,6 +17,13 @@ spec:
     spec:
       containers:
         - name: planning-app-deployment
-          image: blessedmine/planning-app-deployment:v1
+          image: blessedmine/planning-app-deployment:v2
           ports:
-            - containerPort: 3000
+            - containerPort: 80
+          resources:
+            limits:
+              cpu: 500m
+              memory: 500Mi
+            requests:
+              cpu: 200m
+              memory: 300Mi
