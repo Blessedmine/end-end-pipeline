@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: planning-app-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: planning-app-deployment
+  template:
+    metadata:
+      labels:
+        app: planning-app-deployment
+    spec:
+      containers:
+        - name: planning-app-deployment
+          image: blessedmine/planning-app-deployment:v1
+          ports:
+            - containerPort: 3000
