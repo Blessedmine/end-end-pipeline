@@ -4,9 +4,13 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - 'manifest/**'
   pull_request:
     branches: [ "main" ]
   workflow_dispatch:
+
+
 
 
 jobs:
@@ -14,18 +18,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v1
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node-version: 20.x
-          cache: npm
+          cache: 'npm'
 
-      - name: Install node dependencies
+      - name: Install dependencies
         run: npm install
       
       - name: Build Docker Image
@@ -42,7 +46,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
         with:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           fetch-depth: 0  # get all history of all branches and tags
@@ -65,31 +69,3 @@ jobs:
               --username ${{ secrets.ARGOCD_USERNAME }} \
               --password ${{ secrets.ARGOCD_PASSWORD }} \
               --insecure
-
-      - name: Update deployment manifest
-        run: |
-            git config user.name "${{ secrets.GIT_USERNAME }}"
-            git config user.email "${{ secrets.GIT_EMAIL }}"
-            git fetch origin
-            git checkout main
-            git pull origin main
-            pwd
-            cat manifest/deployment.yaml
-            pwd
-            sed -i "s+${{ secrets.DOCKERHUB_USERNAME }}/planning-app.*+${{ secrets.DOCKERHUB_USERNAME }}/planning-app:${{ github.sha }}+g" manifest/deployment.yaml
-            cat manifest/deployment.yaml
-
-      - name: Commit and Push the deployment file
-        run: |
-          git config user.name "${{ secrets.GIT_USERNAME }}"
-          git config user.email "${{ secrets.GIT_EMAIL }}"
-          git remote set-url origin https://$GIT_USERNAME:$PERSONAL_ACCESS_TOKEN@github.com/${{ github.repository }}.git
-          git fetch origin
-          git checkout main
-          git pull origin main
-          git add .
-          git commit -m "Update image to planning-app:${{ github.sha }}"
-          git push origin main
-
-      - name: sync arogcd
-        run: argocd app sync planning-app
