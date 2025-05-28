@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths-ignore:
-      - 'manifest/***'  # it will ignore changes made on manifest
+      - 'manifest/**'
   pull_request:
     branches: [ "main" ]
   workflow_dispatch:
