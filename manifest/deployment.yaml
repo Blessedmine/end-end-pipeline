@@ -6,7 +6,7 @@ metadata:
   labels:
     app: planning-app-deployment
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: planning-app-deployment
