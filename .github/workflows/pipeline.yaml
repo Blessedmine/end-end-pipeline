@@ -95,4 +95,4 @@ jobs:
           git push origin main
 
       - name: sync arogcd
-        run: argocd app sync planning-app
+        run: argocd app sync planning-app-deployment
