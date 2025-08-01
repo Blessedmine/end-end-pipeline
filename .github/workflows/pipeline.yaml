@@ -1,6 +1,6 @@
 name: End to End Pipeline
 # latest update
-#connecting the GH
+#connecting the Docker
 on:
   push:
     branches:
