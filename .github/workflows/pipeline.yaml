@@ -1,6 +1,6 @@
 name: End to End Pipeline
 # latest update
-#created a new token
+#connecting the GH
 on:
   push:
     branches:
