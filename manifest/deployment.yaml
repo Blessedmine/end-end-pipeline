@@ -16,7 +16,7 @@ spec:
         app: planning-app-deployment
       containers:
         - name: planning-app-deployment    
-          image: blessedmine/planning-app:09596171f4bcc95962bdc8ff97d3bea0e3bcc846
+          image: blessedmine/planning-app-deployment:v2
           ports:
             - containerPort: 80
           resources:
