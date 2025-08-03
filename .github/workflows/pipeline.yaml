@@ -1,6 +1,5 @@
 name: End to End Pipeline
-# latest update
-#editing the app
+
 on:
   push:
     branches:
@@ -8,7 +7,8 @@ on:
     paths-ignore:
       - 'manifest/**' #will not run a build when the manifest is updated
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
   workflow_dispatch:
 
 
@@ -80,7 +80,7 @@ jobs:
           pwd
           cat manifest/deployment.yaml
           pwd
-          sed -i "s+${{ secrets.DOCKERHUB_USERNAME }}/planning-app.*+${{ secrets.DOCKERHUB_USERNAME }}/planning-app:${{ github.sha }}+g" manifest/deployment.yaml
+          sed -i "s+${{ secrets.DOCKERHUB_USERNAME }}/planning-app-deployment.*+${{ secrets.DOCKERHUB_USERNAME }}/planning-app:${{ github.sha }}+g" manifest/deployment.yaml
           cat manifest/deployment.yaml
 
       - name: Commit and Push the deployment file
@@ -92,7 +92,7 @@ jobs:
           git checkout main
           git pull origin main
           git add .
-          git commit -m "Update image to planning-app:${{ github.sha }}"
+          git commit -m "Update image to planning-app-deployment:${{ github.sha }}"
           git push origin main
 
       - name: sync arogcd
