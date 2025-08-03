@@ -1,12 +1,11 @@
 name: End to End Pipeline
 # latest update
-#connecting the Docker
 on:
   push:
     branches:
       - main
     paths-ignore:
-      - 'manifest/**'
+      - 'manifest/**' #will not run a build when the manifest is updated
   pull_request:
     branches: [ "main" ]
   workflow_dispatch:
@@ -96,4 +95,4 @@ jobs:
           git push origin main
 
       - name: sync arogcd
-        run: argocd app sync planning-app-deployment
+        run: argocd app sync planning-app-deploymentx
