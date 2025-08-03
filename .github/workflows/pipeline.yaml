@@ -1,6 +1,6 @@
 name: End to End Pipeline
 # latest update
-#creating the namespace
+#editing the app
 on:
   push:
     branches:
