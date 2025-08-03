@@ -1,6 +1,6 @@
 name: End to End Pipeline
 # latest update
-#removing the X error
+#creating the namespace
 on:
   push:
     branches:
